@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.sidebars{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 260px;
+  background: #405465;
+  z-index: 100;
+  transition: all 0.5s ease;
+}
+.sidebars.close{
+  width: 78px;
+}
+.sidebars .logo-details{
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.sidebars .logo-details i{
+  font-size: 30px;
+  color: #fff;
+  height: 50px;
+  min-width: 78px;
+  text-align: center;
+  line-height: 50px;
+}
+.sidebars .logo-details .logo_name{
+  font-size: 22px;
+  color: #fff;
+  font-weight: 600;
+  transition: 0.3s ease;
+  transition-delay: 0.1s;
+}
+.sidebars.close .logo-details .logo_name{
+  transition-delay: 0s;
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebars .nav-links{
+  height: 100%;
+  padding: 30px 0 150px 0;
+  overflow: auto;
+}
+.sidebars.close .nav-links{
+  overflow: visible;
+}
+.sidebars .nav-links::-webkit-scrollbar{
+  display: none;
+}
+.sidebars .nav-links li{
+  position: relative;
+  list-style: none;
+  transition: all 0.4s ease;
+}
+.sidebars .nav-links li:hover{
+  background: #56799e;
+}
+.sidebars .nav-links li .iocn-link{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sidebars.close .nav-links li .iocn-link{
+  display: block
+}
+.sidebars .nav-links li i{
+  height: 50px;
+  min-width: 78px;
+  text-align: center;
+  line-height: 50px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.sidebars .nav-links li.showMenu i.arrow{
+  transform: rotate(-180deg);
+}
+.sidebars.close .nav-links i.arrow{
+  display: none;
+}
+.sidebars .nav-links li a{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.sidebars .nav-links li a .link_name{
+  font-size: 18px;
+  font-weight: 400;
+  color: #fff;
+  transition: all 0.4s ease;
+}
+.sidebars.close .nav-links li a .link_name{
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebars .nav-links li .sub-menu{
+  padding: 6px 6px 14px 80px;
+  margin-top: -10px;
+  background: #56799e;
+  display: none;
+}
+.sidebars .nav-links li.showMenu .sub-menu{
+  display: block;
+}
+.sidebars .nav-links li .sub-menu a{
+  color: #fff;
+  font-size: 15px;
+  padding: 5px 0;
+  white-space: nowrap;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+.sidebars .nav-links li .sub-menu a:hover{
+  opacity: 1;
+}
+.sidebars.close .nav-links li .sub-menu{
+  position: absolute;
+  left: 100%;
+  top: -10px;
+  margin-top: 0;
+  padding: 10px 20px;
+  border-radius: 0 6px 6px 0;
+  opacity: 0;
+  display: block;
+  pointer-events: none;
+  transition: 0s;
+}
+.sidebars.close .nav-links li:hover .sub-menu{
+  top: 0;
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+}
+.sidebars .nav-links li .sub-menu .link_name{
+  display: none;
+}
+.sidebars.close .nav-links li .sub-menu .link_name{
+  font-size: 18px;
+  opacity: 1;
+  display: block;
+}
+.sidebars .nav-links li .sub-menu.blank{
+  opacity: 1;
+  pointer-events: auto;
+  padding: 3px 20px 6px 16px;
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebars .nav-links li:hover .sub-menu.blank{
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebars .profile-details{
+  position: fixed;
+  bottom: 0;
+  width: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1d1b31;
+  padding: 12px 0;
+  transition: all 0.5s ease;
+}
+.sidebars.close .profile-details{
+  background: none;
+}
+.sidebars.close .profile-details{
+  width: 78px;
+}
+.sidebars .profile-details .profile-content{
+  display: flex;
+  align-items: center;
+}
+.sidebars .profile-details img{
+  height: 52px;
+  width: 52px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 0 14px 0 12px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+}
+.sidebars.close .profile-details img{
+  padding: 10px;
+}
+.sidebars .profile-details .profile_name,
+.sidebars .profile-details .job{
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.sidebars.close .profile-details i,
+.sidebars.close .profile-details .profile_name,
+.sidebars.close .profile-details .job{
+  display: none;
+}
+.sidebars .profile-details .job{
+  font-size: 12px;
+}
+.home-section{
+  position: relative;
+  background: #fff;
+  height: 100vh;
+  left: 260px;
+  width: calc(100% - 260px);
+  transition: all 0.5s ease;
+}
+.sidebars.close ~ .home-section{
+  left: 78px;
+  width: calc(100% - 78px);
+}
+.home-section .home-content{
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+.home-section .home-content .bx-menu,
+.home-section .home-content .text{
+  color: #28465a;
+  font-size: 35px;
+}
+.home-section .home-content .bx-menu{
+  margin: 0px 15px 176px 15px;
+  cursor: pointer;
+}
+.home-section .home-content .text{
+  font-size: 26px;
+  font-weight: 600;
+}
+@media (max-width: 400px) {
+  .sidebars.close .nav-links li .sub-menu{
+    display: none;
+  }
+  .sidebars{
+    width: 78px;
+  }
+  .sidebars.close{
+    width: 0;
+  }
+  .home-section{
+    left: 78px;
+    width: calc(100% - 78px);
+    z-index: 100;
+  }
+  .sidebars.close ~ .home-section{
+    width: 100%;
+    left: 0;
+  }
+}
