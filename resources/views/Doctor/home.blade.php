@@ -3,16 +3,7 @@
 <head>
 @include('Doctor.layout.bootstrap')
 @include('Doctor.layout.sidebar')
-<style>
-.middle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
 
-</style>
 </head>
 <body>
  @include('Doctor.layout.sidebarMain')
