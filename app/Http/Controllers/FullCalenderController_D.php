@@ -17,7 +17,7 @@ class FullCalenderController_D extends Controller
     public function index(Request $request, $id_Doctor)
     {
         if($request->ajax()) {
-       
+        
              $data = EventDoctor::whereDate('start', '>=', $request->start)
                        ->whereDate('end',   '<=', $request->end)
                        ->get(['id', 'status', 'start', 'end','NomP','NomD','fk_doctor']);
@@ -89,13 +89,13 @@ class FullCalenderController_D extends Controller
             }//end foreach
             }
             if($j==0){
-              return response()->json("maimknch");
+              return response()->json("Impossible check date");
             }else{
               $p->status           = $request->status;
               $p->start           = $request->start;
               $p->end             = $request->end;
               $p->update();
-             return response()->json("good");
+             return response()->json("le rendez vous est réservé");
             }
                
                break;
@@ -146,10 +146,12 @@ class FullCalenderController_D extends Controller
                 break;
           }
           }
-         //end foreach
-          }    
+         //-------------
+        }    
           if($j==0){
-            return response()->json("maimknch");
+            // return response()->json("Impossible check time");
+            return redirect()->back() ->with('alert', 'please check time !');
+
           }else{
             $ps = new EventDoctor;
             $do=Doctor::find($request->y);
@@ -174,7 +176,7 @@ class FullCalenderController_D extends Controller
                  
        }
         else{
-        dd("Probleme dans time ",$result1,$result2,$ystart,$yend);
+          return redirect()->back() ->with('alert', 'please check time !');
         }
   }
    public function pending($id_Doctor){

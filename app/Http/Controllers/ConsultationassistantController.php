@@ -7,6 +7,14 @@ use App\Models\Patient;
 use App\Models\consultation;
 use App\Models\ordonnance;
 use Illuminate\Http\Request;
+use App\Models\EventDoctor;
+
+use App\Models\Services;
+use App\Models\Operations;
+use App\Models\dents;
+use App\Models\traitements;
+use Illuminate\Support\Facades\DB;
+
 
 class ConsultationassistantController extends Controller
 {
@@ -17,10 +25,17 @@ class ConsultationassistantController extends Controller
      */
     public function index($id_Assistant, $fk_Doctor)
     {
+        $rdv = EventDoctor::all();
         $d = doctor::all();
         $a = assistant::all();
         $data = patient::all();
-        return view('Assistant.Consultation',compact('data','a','d','id_Assistant','fk_Doctor') );  
+        $serv= Services::all(); 
+        $dent=dents::all();
+        $op=Operations::all();
+        $trait=traitements::all();
+        $consultfrombd=consultation::all();
+        $patientanddent=DB::table('Operations')->join('Consultation','Operations.fk_consultation','=','consultation.id_consultation')->join('patient','patient.id_patient','=','consultation.fk_patient')->join('traitements','traitements.id_traitement','=','Operations.fk_traitement')->join('services','services.id_service','=','traitements.fk_service')->join('dents','dents.id_dents','=','traitements.fk_dent')->join('event_doctors','event_doctors.fk_patient','=','patient.id_patient')->select('consultation.id_consultation','patient.Nom','patient.Email','patient.Phone', 'dents.nombre_de_dent', 'services.service','event_doctors.start','event_doctors.end','services.prix')->get()->toArray();
+        return view('Assistant.Consultation',compact('data','a','d','serv','consultfrombd','dent','op','trait','patientanddent','id_Assistant','fk_Doctor','rdv') );  
     }
 
     /**
@@ -42,28 +57,20 @@ class ConsultationassistantController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nomP' =>'required|max:25',
-            'nomD' =>'required|max:25',
-            'observation' =>'required|max:25',
-            'datec' =>'required|max:25',
-            'montant'=>'required|max:25',
+            'doc' => 'required',
+            'patient' => 'required',
         ]);
+
         $consu=new consultation();
-        $consu->NomPatient=$request->nomP;
-        $consu->NomDoctor=$request->nomD;
-        $consu->Observation=$request->observation;
-        $consu->DateConsultation=$request->datec;
-        $consu->Montant_C=$request->montant;
-        $consu->fk_assistant   = $request->assis;
         $consu->fk_doctor      = $request->doc;
-        $consu->fk_patient     = $request->pat;
-        $consu->fk_ordonnance  = $request->or;
-        $consu->save();
+        $consu->fk_patient     = $request->patient;
+         $consu->save();
+        
+        
         return redirect()->back();
-        //return redirect('assistant/consultation');
     }
 
-    /**
+    /** 
      * Display the specified resource.
      *
      * @param  \App\Models\consultation  $consultation

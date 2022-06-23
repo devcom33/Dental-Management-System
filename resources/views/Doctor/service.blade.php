@@ -10,21 +10,36 @@
     @include('Doctor.layout.sidebarMain')
     @include('Doctor.layout.startSection')
     @include('Doctor.layout.navBar')
-                <div class="col-sm-12 col-md-8 col-lg-10">
+    {{-- Message d'errors --}}
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+{{-- end message --}}
+
+            <div class="cart-body">
                 <form method="POST" action="{{route('service.store')}}">
                     @csrf  
-                        <div class="mb-3">
+                        <div class="form-group">
                             <label class="form-label">Nom de Service</label>
                             <input name="nomservice" type="text" class="form-control">
                         </div>
-                        <div class="mb-3">
+                        <div class="form-group">
                             <label class="form-label">Prix(DH)</label>
                             <input name="prix" type="text" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary">Ajoute</button>
-                </form>
+                    </form>
+                    </div>
                 </div>
-                </div>
+
                 @include('Doctor.layout.endSection')
                 @include('Doctor.layout.scriptSide')
 

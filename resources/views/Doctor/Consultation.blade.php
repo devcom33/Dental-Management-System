@@ -7,28 +7,45 @@
    @include('Doctor.layout.sidebar')
 </head>
   <body>
+
     @include('Doctor.layout.sidebarMain')
     @include('Doctor.layout.startSection')
 
+    {{-- Message d'errors --}}
+
+      @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+      @endif
+
+      {{-- end message --}}
+
+
     <div class="card shadow mb-3">
           <div class="card-header d-flex flex-wrap justify-content-center align-items-center justify-content-sm-between gap-3">
-            <p class="text-primary m-0 fw-bold" >Consultation</p>
+            <p class="text-primary m-0 fw-bold" style="color:rgb(9,5,0);">Consultation</p>
             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Traitement</button>
           </div>
+
                               <form method="POST" action="{{route('consultationdoctor.store')}}">
                                 @csrf
                                 <div class="card-body">
                                       <div class="row">
                                               <div class="col-sm-12 col-md-8 col-lg-6">
                                                     <div class="form-floating">
-                                                          <select name="pat" class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                                              <option selected>Patient</option>
+                                                          <select name="patient" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                                              <option ></option>
 
                                                          
                                                               @foreach ($rdv as $key => $value)
-                                                              @if($value->fk_doctor==$id_Doctor && $value->status=="pending")
-                                                              <option value="{{$value->fk_patient}}">{{$value->NomP}}</option>
-                                                              @endif
+                                                                @if($value->fk_doctor==$id_Doctor && $value->status=="pending")
+                                                                <option value="{{$value->fk_patient}}">{{$value->NomP}}</option>
+                                                                @endif
                                                               @endforeach
                                                           </select>
                                                           <label for="floatingSelect">Nom Patient</label>
@@ -52,15 +69,16 @@
 
                                         <div class="card-footer">
                                           <button type="submit" class="btn btn-success">Enregistrer</button>
-
-                                          <form method="POST" action="{{route('operation.store')}}">
-                                          @csrf
-                                            <button type="submit" class="btn btn-danger">Completed</button>
-                                        </form>
+                                          
                                         </div>
-
                               </form>
-
+                              <div class="card-footer">
+                              <form method="POST" action="{{route('operation.store')}}">
+                                  @csrf
+                                  
+                                    <button type="submit" class="btn btn-danger">Completed</button>
+                                </form>
+                                </div>
       
         </div>
     </div>
@@ -78,12 +96,12 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   </div>
                   <div class="modal-body">
-                    <div class="row">
-                    <div class="col-sm-12 col-md-8 col-lg-8">
-                        <div class="text-left">
-                          <img src="{{asset('assets/img/Universal-tooth-numbering-UTN-system-and-Federation-Dentaire-Internationale-FDI.png')}}" class="img-fluid" alt="Responsive image">
-                        </div>
-                    </div>
+                      <div class="row">
+                          <div class="col-sm-12 col-md-8 col-lg-8">
+                              <div class="text-left">
+                                <img src="{{asset('assets/img/teethnumber.png')}}" class="img-fluid" alt="Responsive image">
+                              </div>
+                          </div>
                           <div class="col-sm-12 col-md-8 col-lg-2">
 
                                     <form method="POST" action="{{route('traitement.store')}}">
@@ -107,7 +125,7 @@
                                           <button type="submit" class="btn btn-primary">click</button>
                                     </form>
                           </div>
-                    </div>
+                      </div>
                         <!-- Body modal full screen -->
                        
                         </div>
@@ -145,8 +163,8 @@
                                 <td>{{$value->Phone}}</td>
                                 <td>{{$value->nombre_de_dent}}</td>
                                 <td>{{$value->service}}</td>
-                                <td>{{$value->start}}DH</td>
-                                <td>{{$value->end}}DH</td>
+                                <td>{{$value->start}}</td>
+                                <td>{{$value->end}}</td>
                                 <td>{{$value->prix}}DH</td>
                                         
                               </tr>   

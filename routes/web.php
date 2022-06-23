@@ -15,7 +15,7 @@ use App\Http\Controllers\Logout;
 use App\Http\Controllers\TraitementsController;
 use App\Http\Controllers\OperationController;
 use App\Http\Controllers\ServicesController;
-
+use App\Http\Controllers\homeController;
 
 
 /*
@@ -28,10 +28,18 @@ use App\Http\Controllers\ServicesController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('/dashboard',[Controller::class,'dashboard'])->name('home');
+Route::group(['middleware'=>['AuthCheck']], function(){
+    Route::get('/',[Controller::class,'login']);
 
-Route::get('/',[Controller::class,'login']);
-Route::post('/home',[Controller::class,'home'])->name('home');
-//Admin
+
+    Route::get('/dashboard/{id}', [Controller::class,'indx'])->name('home.indx');
+
+    Route::get('/dashboard/{id}/{id2}', [Controller::class,'indxassistant'])->name('home.indxassistant');
+
+    Route::get('/dashboard', [Controller::class,'indexadmin'])->name('home.indexadmin');
+
+    //Admin
 Route::get('Admin/doctor',[AdminController::class,'index'])->name('addoctor');
 Route::get('Admin/doctor/create', [AdminController::class, 'create']);
 Route::post('Admin/doctor', [AdminController::class, 'store'])->name('admind.store');
@@ -62,26 +70,31 @@ Route::get('doctor/patient/{id}/{idd}', [DoctorController::class, 'show'])->name
 Route::get('doctor/patient/{id}/edit', [DoctorController::class, 'edit'])->name('doctor.edit');
 Route::put('doctor/patient/{id}', [DoctorController::class, 'update'])->name('doctor.update');
 Route::delete('doctor/patient/{id}', [DoctorController::class, 'destroy'])->name('doctor.destroy');
-
+Route::get('doctorR/patient/pdf/{id}', [AssistantController::class, 'pdf'])->name('doctor.pdf');
 //Assistant
-
 Route::get('assistant/patient/{id1a}/{id2b}',[AssistantController::class,'index'])->name('assistant.index');
 Route::get('assistant/patient/create', [AssistantController::class, 'create']);
 Route::post('assistant/patient', [AssistantController::class, 'store'])->name('assistant.store');
 Route::get('assistant/patient/{id}/edit', [AssistantController::class, 'edit'])->name('assistant.edit');
 Route::put('assistant/patient/{id}', [AssistantController::class, 'update'])->name('assistant.update');
-Route::get('assistant/patient/{id}', [AssistantController::class, 'show'])->name('assistant.show');
+Route::get('assistantT/patient/{idw1}/{idw2}/{idw3}', [AssistantController::class, 'show'])->name('assistant.show');
+//pdf
+Route::get('assistantT/patient/pdf/{id}', [AssistantController::class, 'pdf'])->name('assistant.pdf');
+
+
 Route::delete('assistant/patient/{id}', [AssistantController::class, 'destroy'])->name('assistant.destroy');
 
+//Route::get('/assistant/{id1}/{id2}',[AssistantController::class,'index_Ass'])->name('assistant');
 //Route::get('/assistant/{id1}/{id2}',[AssistantController::class,'index_Ass'])->name('assistant');
 
 
 //Route::get('/edit-industry/{id}', 'Industries@edit')->name('admin.editIndustry');
-Route::get('/Search',[AdminController::class,'search']);
-Route::get('/SearchA',[AdminController::class,'searchA']);
-Route::get('/Search1/{id1c}/{id2c}',[AssistantController::class,'search'])->name('Search1');
-Route::get('/Search2/{idd}',[DoctorController::class,'search'])->name('Search2');
-Route::resource('patient', PatientController::class);
+
+Route::get('/SearchDoctor',[AdminController::class,'searchD'])->name('admin.searchD');
+Route::get('/Search',[AdminController::class,'searchA'])->name('admin.assistant');
+Route::get('/Search1/{id1c}/{id2c}',[AssistantController::class,'search'])->name('assistant.search');
+Route::get('/Search1/{id1c}',[DoctorController::class,'search'])->name('doctor.search');
+
 
 // Route::get('/admin/{key}',[AdminController::class,'click']);
 
@@ -101,6 +114,8 @@ Route::put('assistant/consultation/{id}', [ConsultationassistantController::clas
 Route::get('assistant/consultation/{id}', [ConsultationassistantController::class, 'show'])->name('consultationassistant.show');
 Route::delete('assistant/consultation/{id}', [ConsultationassistantController::class, 'destroy'])->name('consultationassistant.destroy');
 
+// Route::get('/Search1/{id1c}/{id2c}}',[AssistantController::class,'search'])->name('assistant.search');
+
 
 //fullcalender
 Route::get('assistant/fullcalender/{ida}/{idb}', [FullCalenderController::class, 'index'])->name('fullcalenderA.index');
@@ -118,8 +133,8 @@ Route::get('doctor/completed/{id}', [FullCalenderController_D::class, 'completed
 Route::get('doctor/validier/{id}', [FullCalenderController_D::class, 'valider'])->name('doctor.validerX');
 
 
-Route::get('assistant/pending/{idp}', [FullCalenderController::class, 'pending'])->name('pending');
-Route::get('assistant/completed/{idc}', [FullCalenderController::class, 'completed'])->name('completed');
+Route::get('assistant/pending/{idp1}/{idp2}', [FullCalenderController::class, 'pending'])->name('pending');
+Route::get('assistant/completed/{idc}/{idc2}', [FullCalenderController::class, 'completed'])->name('completed');
 
 Route::get('doctor/service/{id}', [ServicesController::class, 'index'])->name('service.index');
 Route::post('doctor/service', [ServicesController::class, 'store'])->name('service.store');
@@ -129,5 +144,8 @@ Route::resource('dent', DentsController::class);
 
 Route::resource('traitement', TraitementsController::class);
 Route::resource('operation', OperationController::class);
+});
+
 
 Route::get('doctor/logout', [Logout::class, 'logout'])->name('logout');
+Route::get('assistant/logout', [Logout::class, 'logout'])->name('logoutAssistant');

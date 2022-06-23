@@ -3,24 +3,24 @@
 namespace App\Http\Controllers;
   
 use Illuminate\Http\Request;
-use App\Models\Event;
+use App\Models\EventDoctor;
 use App\Models\Doctor;
 use App\Models\Assistant;
+use App\Models\Event;
 use App\Models\Patient;
-use App\Models\EventDoctor;
 use League\CommonMark\Extension\Table\Table;
 use Carbon\Carbon;
 use LDAP\Result;
 
 class FullCalenderController extends Controller
 {
-    public function index(Request $request,$id_Assistant, $fk_Doctor)
+    public function index(Request $request, $fk_Doctor,$id_Assistant)
     {
         if($request->ajax()) {
        
-             $data = Event::whereDate('start', '>=', $request->start)
+             $data = EventDoctor::whereDate('start', '>=', $request->start)
                        ->whereDate('end',   '<=', $request->end)
-                       ->get(['id', 'status', 'start', 'end','NomP','NomD','fk_doctor','fk_Assistant']);
+                       ->get(['id', 'status', 'start', 'end','NomP','NomD','fk_doctor']);
   
              return response()->json($data);
         }
@@ -29,8 +29,7 @@ class FullCalenderController extends Controller
         $d = doctor::all();
         $p = patient::all();
         $a = assistant::all();
-        $e = Event::all();
-        return view('Assistant.fullcalender',compact('p','d','a','e','id_Assistant', 'fk_Doctor'));
+        return view('Assistant.fullcalender',compact('p','d','a','fk_Doctor','id_Assistant'));
     }
  
     public function ajax(Request $request)
@@ -38,7 +37,7 @@ class FullCalenderController extends Controller
  
         switch ($request->type) {
            case 'add':
-              $event = Event::create([
+              $event = EventDoctor::create([
                 'status' => $request->status,
                   'start' => $request->start,
                   'end' => $request->end,
@@ -49,7 +48,7 @@ class FullCalenderController extends Controller
   
            case 'update':
              $j = 1; 
-                $rdv = Event::all();
+                $rdv = EventDoctor::all();
 
                 $start = date("H:i:s", strtotime($request->start));
                 $end = date("H:i:s", strtotime($request->end));
@@ -57,7 +56,7 @@ class FullCalenderController extends Controller
                 $ystart = date("Y-m-d", strtotime($request->start));
                 $yend = date("Y-m-d", strtotime($request->end));
 
-                $p = Event::find($request->id);
+                $p = EventDoctor::find($request->id);
            
                 $result1 = $ystart<=$yend;
                 $result2 = $start<$end;
@@ -90,19 +89,19 @@ class FullCalenderController extends Controller
             }//end foreach
             }
             if($j==0){
-              return response()->json("maimknch");
+              return response()->json("Impossible check date");
             }else{
               $p->status           = $request->status;
               $p->start           = $request->start;
               $p->end             = $request->end;
               $p->update();
-             return response()->json("good");
+             return response()->json("le rendez vous est réservé");
             }
                
                break;
   
                case 'delete':
-              $event = Event::find($request->id)->delete();
+              $event = EventDoctor::find($request->id)->delete();
   
               return response()->json($event);
              break;
@@ -115,7 +114,7 @@ class FullCalenderController extends Controller
     public function store(Request $request)
     {
       $j=1;
-       $rdv = Event::all();
+       $rdv = EventDoctor::all();
 
        $start = date("H:i:s", strtotime($request->start));
        $end = date("H:i:s", strtotime($request->end));
@@ -147,12 +146,12 @@ class FullCalenderController extends Controller
                 break;
           }
           }
-         //end foreach
+         //-------------
           }    
           if($j==0){
-            return response()->json("maimknch");
+            return redirect()->back() ->with('alert', 'please check time!');
           }else{
-            $ps = new Event;
+            $ps = new EventDoctor;
             $do=Doctor::find($request->y);
             $pa=Patient::find($request->x);
               $ps->NomP            =$pa->Nom;
@@ -162,13 +161,12 @@ class FullCalenderController extends Controller
               $ps->start           = $request->start;
               $ps->end             = $request->end;
               if($request->status==1||$request->status==1) {
-                $ps->status         = "Confirm";
+                $ps->status         = "completed";
               } 
               if($request->status==2||$request->status==2) {
-                $ps->status = "Panding";
+                $ps->status = "pending";
               }
               $ps->fk_doctor       = $request->y;
-              $ps->fk_assistant    = $request->as;
               $ps->fk_patient      = $request->x;
               $ps->save();   
               return redirect()->back();
@@ -176,23 +174,22 @@ class FullCalenderController extends Controller
                  
        }
         else{
-        dd("Probleme dans time ",$result1,$result2,$ystart,$yend);
+          return redirect()->back() ->with('alert', 'impossible check time!');
         }
   }
-   
-  public function pending($id_Doctor){
-    $pending = Event::all();
-    return view('Assistant.pending',compact('id_Doctor','pending')) ;
+   public function pending($id_Assistant,$fk_Doctor){
+     $pending = EventDoctor::all();
+     return view('Assistant.pending',compact('fk_Doctor','pending','id_Assistant')) ;
+   }
+   public function completed($id_Assistant,$fk_Doctor){
+    $completed = EventDoctor::all();
+    return view('Assistant.completed',compact('fk_Doctor','completed','id_Assistant')) ;
   }
-  public function completed($id_Doctor){
-   $completed = Event::all();
-   return view('Assistant.completed',compact('id_Doctor','completed')) ;
- }
- public function valider($id_p){
-   $validier = Event::find($id_p);
-   $validier->status  = "completed";
-   $validier->save();
-   return redirect()->back();
+  public function valider($id_p){
+    $validier = EventDoctor::find($id_p);
+    $validier->status  = "completed";
+    $validier->save();
+    return redirect()->back();
 
- }
+  }
 }

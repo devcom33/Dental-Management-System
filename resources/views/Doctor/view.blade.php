@@ -36,6 +36,9 @@
                                         <!-- end button close -->
                                     </div>
                                 </div>
+                                <div class="text-center">
+                                    <a class="btn btn-outline-info"  href="{{ route('doctor.pdf',$post->id_patient) }}">Imprimer</a> 
+                                </div>
                                 
                     </div>
                   </div>
@@ -100,6 +103,8 @@
      <!-- next -->
      <br>
       <div class="container">
+      <h2>Historique</h2>
+      <br>
               <div class="table-responsive">
                       <table class="table my-0">
                             <thead>

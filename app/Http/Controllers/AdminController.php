@@ -14,8 +14,8 @@ class AdminController extends Controller
 
         
         $a = admin::all();
-        $d = doctor::all(); 
-        $data = assistant::all();
+        $d = doctor::paginate(4); 
+        $data = assistant::paginate(4);;
         $segment=request()->segments();  //il retourn array
         if(end($segment)=="doctor"){
 
@@ -175,13 +175,51 @@ class AdminController extends Controller
         // return redirect()->route('admin.index')
         //                 ->with('success','Post deleted successfully');
     }
-    public function search(Request $request){
-    $data= DB::table('doctor')->where('Nom', $request->search)->paginate(6);
-       return view('Admin.search',compact('data'));
-    }
+    // public function search(Request $request){
+    // $data= DB::table('doctor')->where('Nom', $request->search)->paginate(6);
+    //    return view('Admin.search',compact('data'));
+    // }
+    // public function searchA(Request $request){
+    //     $data= DB::table('assistant')->where('Nom', $request->search)->paginate(6);
+    //        return view('Admin.searchA',compact('data'));
+    //     }
+
     public function searchA(Request $request){
-        $data= DB::table('assistant')->where('Nom', $request->search)->paginate(6);
-           return view('Admin.searchA',compact('data'));
-        }
+       
+        $search = $request->input('search');
+  
+        $data = assistant::query()
+                    ->where('Nom', 'LIKE', "%{$search}%")
+                    // ->orWhere('body', 'LIKE', "%{$search}%")
+                    ->get();
+          $a = admin::all();
+          $d = doctor::paginate(4);
+         if($data==null){
+           
+            // return redirect()->back();
+         }
+
+         return view('admin.searchA',compact('data','a','d')); 
+
+    }
+
+    public function searchD(Request $request){
+       
+        $search = $request->input('search');
+  
+        $data = doctor::query()
+                    ->where('Nom', 'LIKE', "%{$search}%")
+                    // ->orWhere('body', 'LIKE', "%{$search}%")
+                    ->get();
+         $a = admin::all();
+         $d = doctor::paginate(4);
+         if($data==null){
+            dd("error");
+            // return redirect()->back();
+         }
+
+         return view('admin.search',compact('data','a','d')); 
+
+    }
 }
 

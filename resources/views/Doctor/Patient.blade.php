@@ -80,22 +80,31 @@
 
 @include('Doctor.layout.startSection')
 
+{{-- Message d'errors --}}
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+{{-- end message --}}
       <!-- next -->
+
   <div class="card shadow">
           <div class="card-header d-flex flex-wrap justify-content-center align-items-center justify-content-sm-between gap-3">
             <p class="m-0 fw-bold" style="color:#56799e">Patient Info</p>
           </div>
-  
-          @if ($message = Session::get('success'))
-              <div class="alert alert-success">
-                  <p>{{ $message }}</p>
-              </div>
-          @endif
+
           <div class="card-body">
               <div class="row">
-                    <div class="col-md-6 text-nowrap">
+                    <div class="col-md-3 text-nowrap">
                         <div class="form-floating">
-  
+
                           <select name="x" class="js-exemple-placeholder-single">
                             @foreach ($d as $key => $value)
                               <option value="{{$value->id_doctor}}">{{$value->Nom}}</option>
@@ -103,6 +112,9 @@
                           </select>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div id="dataTable_filter" class="text-md-end dataTables_filter"><form action="{{ route('doctor.search',[$id_Doctor]) }}" method="GET"><label class="form-label"><input name="search" class="form-control form-control-sm" type="search" aria-controls="dataTable" placeholder="Search" /></label></form></div>
+                        </div>
                     <div class="col-md-6">
                           <div id="dataTable_filter" class="text-md-end dataTables_filter">
                                   <div class="pull-right ">
@@ -213,7 +225,12 @@
                                       @endif
                         @endforeach
                 </table>  
+
             </div>
+
+          </div>
+          <div class="d-flex justify-content-center">
+                {!! $data->links() !!}
           </div>
   </div>
   @include('Doctor.layout.endSection')

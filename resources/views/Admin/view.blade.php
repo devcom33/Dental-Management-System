@@ -15,7 +15,6 @@
         <h5 class="card-header">{{$post->Nom}}</h5>
         <div class="card-body">
           <h5 class="card-title">Information sur le Patient</h5>
-            <p class="fs-3">Id            : {{$post->id}}</p>
             <p class="fs-3">Nom           : {{$post->Nom}}</p>
             <p class="fs-3">Prenom        : {{$post->Prenom}}</p>
             <p class="fs-3">Sexe          : {{$post->Sexe}}</p>

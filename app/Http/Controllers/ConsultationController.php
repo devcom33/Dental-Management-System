@@ -49,9 +49,13 @@ class ConsultationController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'doc' => 'required',
+            'patient' => 'required',
+        ]);
         $consu=new consultation();
         $consu->fk_doctor      = $request->doc;
-        $consu->fk_patient     = $request->pat;
+        $consu->fk_patient     = $request->patient;
         $consu->save();
 
         

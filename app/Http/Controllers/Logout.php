@@ -9,12 +9,9 @@ class Logout extends Controller
 {
     public function logout(Request $request) {
      
-    Auth::logout();
- 
-    $request->session()->invalidate();
- 
-    $request->session()->regenerateToken();
- 
-    return redirect('/');
+        if(session()->has('LoggedUser')){
+            session()->pull('LoggedUser');
+            return redirect('/');
+        }
     }
 }

@@ -23,7 +23,7 @@ class DoctorController extends Controller
     {
         $d = doctor::all();
          $a = assistant::all();
-        $data = patient::all();
+        $data = patient::paginate(5);
         $calend = event::all();
    
 
@@ -48,6 +48,7 @@ class DoctorController extends Controller
             'addr'      => 'required|max:25',
             'phone'     => 'required|max:25',
             'email'     => 'required|email',
+            'datee'     => 'required',
         ]);
         $pa = new patient;
         $pa->Nom               = $request->nom;
@@ -82,6 +83,7 @@ class DoctorController extends Controller
         $patientanddent=DB::table('Operations')->join('Consultation','Operations.fk_consultation','=','consultation.id_consultation')->join('patient','patient.id_patient','=','consultation.fk_patient')->join('traitements','traitements.id_traitement','=','Operations.fk_traitement')->join('services','services.id_service','=','traitements.fk_service')->join('dents','dents.id_dents','=','traitements.fk_dent')->join('event_doctors','event_doctors.fk_patient','=','patient.id_patient')->select('patient.id_patient','consultation.id_consultation','patient.Nom','patient.Email','patient.Phone', 'dents.nombre_de_dent', 'services.service','event_doctors.start','event_doctors.end','services.prix')->get()->toArray();
       
       //====================
+
       $Montant = 0;
       foreach ($patientanddent as $key => $value){
         if($value->id_patient==$post->id_patient){
@@ -129,10 +131,30 @@ class DoctorController extends Controller
          return redirect()->back();
        
     }
-    public function search(Request $request,$id_Doctor){
-        $data= DB::table('patient')->where('Nom', $request->search)->paginate(11);
-        return view('Doctor.search',compact('data','id_Doctor'));
-        return redirect()->back();
- 
+
+    public function pdf($id) {
+        $post = patient::find($id);
+        $pdf = PDF::loadView('Assistant.pdf', compact('post'));
+        $pdf = PDF::loadView('Assistant.pdf', compact('post'))->setOptions(['defaultFont' => 'sans-serif']);
+
+        return $pdf->download('List' . $id. '.pdf');
+    }
+    public function search($id_Doctor,Request $request){
+       
+        $search = $request->input('search');
+  
+        $data = patient::query()
+                    ->where('Nom', 'LIKE', "%{$search}%")
+                    // ->orWhere('body', 'LIKE', "%{$search}%")
+                    ->get();
+         $d = doctor::all();
+         $a = assistant::all();
+         if($data==null){
+            dd("error");
+            // return redirect()->back();
+         }
+
+         return view('doctor.search',compact('data','id_Doctor','a','d')); 
+
     }
 }

@@ -35,8 +35,8 @@ class ServicesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nomservice'=> 'required|max:25',
-            'prix'=> 'required|max:25',
+            'nomservice'=> 'required',
+            'prix'=> 'required|max:8',
         ]);
         $services=new Services;
         $services->service=$request->nomservice;

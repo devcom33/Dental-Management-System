@@ -6,7 +6,7 @@
   </div>
   <ul class="nav-links">
     <li>
-      <a href="#">
+      <a href="{{ route('home.indx',[$id_Doctor])}}">
         <i class="fas fa-home"></i>
         <span class="link_name">Accueil</span>
       </a>

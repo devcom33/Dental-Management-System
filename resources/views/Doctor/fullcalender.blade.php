@@ -13,7 +13,7 @@
 @include('Doctor.layout.startSection')
 @include('Doctor.layout.navBar')
       <div style="text-align: center" class="container">
-          <h1>Add Roundez-Vous</h1>
+          <h1>Ajoute Rendez-Vous</h1>
               <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Add RDV
@@ -159,7 +159,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ajoute Patient</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ajoute Rendez-vous</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -172,7 +172,7 @@
                           <select name="status" class="form-select" aria-label="Default select example">
                             <option >Status</option>
                             <option value="1">Validier</option>
-                            <option value="2" selected>Panding</option>
+                            <option value="2" selected>Pending</option>
                           </select>
                         </div>
             
@@ -247,3 +247,11 @@
 
 </body>
 </html>
+
+<script>
+  var msg = '{{Session::get('alert')}}';
+  var exist = '{{Session::has('alert')}}';
+  if(exist){
+    alert(msg);
+  }
+</script>
