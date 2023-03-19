@@ -1,0 +1,800 @@
+pour les informations sur la base de donnée:
+	voir le fichier .env
+--
+-- Database: `_cabinetentaire`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id_admin` bigint(20) UNSIGNED NOT NULL,
+  `Nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Sexe` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `Nom`, `Prenom`, `Adresse`, `Sexe`, `Phone`, `Email`, `Password`, `created_at`, `updated_at`) VALUES
+(1, 'Lachhab', 'Fadwa', 'Agadir', 'Masculin', '06658943332', 'fadwa@gmail.com', '12345678', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assistant`
+--
+
+CREATE TABLE `assistant` (
+  `id_assistant` bigint(20) UNSIGNED NOT NULL,
+  `Nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Sexe` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fk_admin` bigint(20) UNSIGNED NOT NULL,
+  `fk_doctor` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `assistant`
+--
+
+INSERT INTO `assistant` (`id_assistant`, `Nom`, `Prenom`, `Sexe`, `Phone`, `Email`, `Password`, `fk_admin`, `fk_doctor`, `created_at`, `updated_at`) VALUES
+(1, 'Ellaouzi', 'Ayoub', 'homme', '0677713150', 'ayoub@gmail.com', '12345678', 1, 1, '2022-06-14 22:48:52', '2022-06-14 22:49:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `consultation`
+--
+
+CREATE TABLE `consultation` (
+  `id_consultation` bigint(20) UNSIGNED NOT NULL,
+  `visite_suivant` date DEFAULT NULL,
+  `fk_assistant` bigint(20) UNSIGNED DEFAULT NULL,
+  `fk_doctor` bigint(20) UNSIGNED NOT NULL,
+  `fk_patient` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `consultation`
+--
+
+INSERT INTO `consultation` (`id_consultation`, `visite_suivant`, `fk_assistant`, `fk_doctor`, `fk_patient`, `created_at`, `updated_at`) VALUES
+(49, NULL, NULL, 1, 38, '2022-05-15 19:26:54', '2022-05-15 19:26:54'),
+(50, NULL, NULL, 1, 3, '2022-06-15 19:40:14', '2022-06-15 19:40:14'),
+(51, NULL, NULL, 1, 7, '2022-06-15 19:40:54', '2022-06-15 19:40:54'),
+(52, NULL, NULL, 1, 7, '2022-06-15 19:52:39', '2022-06-15 19:52:39'),
+(53, NULL, NULL, 1, 6, '2022-06-15 19:54:03', '2022-06-15 19:54:03'),
+(54, NULL, NULL, 1, 4, '2022-06-15 19:55:27', '2022-06-15 19:55:27'),
+(55, NULL, NULL, 1, 40, '2022-06-15 20:09:08', '2022-06-15 20:09:08'),
+(56, NULL, NULL, 1, 5, '2022-06-15 20:15:44', '2022-06-15 20:15:44'),
+(57, NULL, NULL, 1, 7, '2022-06-15 21:10:36', '2022-06-15 21:10:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dents`
+--
+
+CREATE TABLE `dents` (
+  `id_dents` bigint(20) UNSIGNED NOT NULL,
+  `nombre_de_dent` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `dents`
+--
+
+INSERT INTO `dents` (`id_dents`, `nombre_de_dent`, `created_at`, `updated_at`) VALUES
+(1, '1', NULL, NULL),
+(2, '2', NULL, NULL),
+(3, '3', NULL, NULL),
+(4, '4', NULL, NULL),
+(5, '5', NULL, NULL),
+(6, '7', NULL, NULL),
+(7, '8', NULL, NULL),
+(8, '9', NULL, NULL),
+(9, '10', NULL, NULL),
+(10, '11', NULL, NULL),
+(11, '12', NULL, NULL),
+(12, '13', NULL, NULL),
+(13, '14', NULL, NULL),
+(14, '15', NULL, NULL),
+(15, '16', NULL, NULL),
+(16, '17', NULL, NULL),
+(17, '18', NULL, NULL),
+(18, '19', NULL, NULL),
+(19, '20', NULL, NULL),
+(20, '21', NULL, NULL),
+(21, '22', NULL, NULL),
+(22, '23', NULL, NULL),
+(23, '24', NULL, NULL),
+(24, '25', NULL, NULL),
+(25, '26', NULL, NULL),
+(26, '27', NULL, NULL),
+(27, '28', NULL, NULL),
+(28, '29', NULL, NULL),
+(29, '30', NULL, NULL),
+(30, '31', NULL, NULL),
+(31, '32', NULL, NULL),
+(32, 'Aucun', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctor`
+--
+
+CREATE TABLE `doctor` (
+  `id_doctor` bigint(20) UNSIGNED NOT NULL,
+  `Nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Sexe` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `DateNaissance` date NOT NULL,
+  `Adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fk_admin` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `doctor`
+--
+
+INSERT INTO `doctor` (`id_doctor`, `Nom`, `Prenom`, `Sexe`, `DateNaissance`, `Adresse`, `Phone`, `Email`, `Password`, `fk_admin`, `created_at`, `updated_at`) VALUES
+(1, 'ELBOUCHRAOUI', 'Mouad', 'homme', '2000-06-17', 'agadir', '0672638262', 'mouad@gmail.com', '12345678', 1, '2022-06-14 22:48:08', '2022-06-15 19:14:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `NomP` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `NomD` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenomP` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenomD` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fk_doctor` bigint(20) UNSIGNED NOT NULL,
+  `fk_assistant` bigint(20) UNSIGNED NOT NULL,
+  `fk_patient` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_doctors`
+--
+
+CREATE TABLE `event_doctors` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `NomP` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `NomD` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenomP` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenomD` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fk_doctor` bigint(20) UNSIGNED NOT NULL,
+  `fk_patient` bigint(20) UNSIGNED NOT NULL,
+  `fk_consultation` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `event_doctors`
+--
+
+INSERT INTO `event_doctors` (`id`, `NomP`, `NomD`, `prenomP`, `prenomD`, `start`, `end`, `status`, `fk_doctor`, `fk_patient`, `fk_consultation`, `created_at`, `updated_at`) VALUES
+(21, 'Bnmousa', 'ELBOUCHRAOUI', 'Khalid', 'Mouad', '2022-06-15 11:30:00', '2022-06-15 12:30:00', 'completed', 1, 3, NULL, '2022-06-15 19:37:35', '2022-06-15 19:40:39'),
+(23, 'Ramzi', 'ELBOUCHRAOUI', 'Amine', 'Mouad', '2022-06-17 09:30:00', '2022-06-17 10:00:00', 'completed', 1, 7, NULL, '2022-06-15 19:40:00', '2022-06-15 21:10:16'),
+(24, 'Bnaicha', 'ELBOUCHRAOUI', 'Fatima', 'Mouad', '2022-05-19 14:30:00', '2022-05-19 15:30:00', 'completed', 1, 6, NULL, '2022-06-15 19:53:53', '2022-06-15 19:54:32'),
+(26, 'Bnmousa', 'ELBOUCHRAOUI', 'Khalid', 'Mouad', '2022-06-16 09:30:00', '2022-06-16 10:30:00', 'pending', 1, 3, NULL, '2022-06-15 20:07:13', '2022-06-15 20:07:13'),
+(28, 'Elkasir', 'ELBOUCHRAOUI', 'Khawla', 'Mouad', '2022-06-15 15:30:00', '2022-06-15 16:30:00', 'completed', 1, 5, NULL, '2022-06-15 20:15:24', '2022-06-15 20:16:21'),
+(29, 'Ramzi', 'ELBOUCHRAOUI', 'Amine', 'Mouad', '2022-06-16 16:30:00', '2022-06-16 17:30:00', 'pending', 1, 7, NULL, '2022-06-15 21:09:53', '2022-06-15 21:09:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hestory`
+--
+
+CREATE TABLE `hestory` (
+  `id_hestory` bigint(20) UNSIGNED NOT NULL,
+  `fk_consultation` bigint(20) UNSIGNED NOT NULL,
+  `fk_traitement` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2019_08_19_000000_create_failed_jobs_table', 1),
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2022_04_08_035716_create_admin_tbl', 1),
+(6, '2022_04_08_035855_create_doctor_tbl', 1),
+(7, '2022_04_08_035955_create_assistant_tbl', 1),
+(8, '2022_05_06_090623_create_patient_table', 2),
+(9, '2022_05_06_034400_create_event_doctors_table', 3),
+(10, '2022_05_05_161739_create_services_table', 4),
+(11, '2022_05_05_170633_create_dents_table', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `operations`
+--
+
+CREATE TABLE `operations` (
+  `id_operation` bigint(20) UNSIGNED NOT NULL,
+  `fk_consultation` bigint(20) UNSIGNED NOT NULL,
+  `fk_traitement` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `operations`
+--
+
+INSERT INTO `operations` (`id_operation`, `fk_consultation`, `fk_traitement`, `created_at`, `updated_at`) VALUES
+(21, 50, 21, '2022-06-15 19:40:23', '2022-06-15 19:40:23'),
+(22, 51, 22, '2022-06-15 19:41:03', '2022-06-15 19:41:03'),
+(23, 52, 23, '2022-06-15 19:53:02', '2022-06-15 19:53:02'),
+(24, 53, 24, '2022-06-15 19:54:14', '2022-06-15 19:54:14'),
+(25, 54, 25, '2022-06-15 19:55:40', '2022-06-15 19:55:40'),
+(26, 55, 26, '2022-06-15 20:09:28', '2022-06-15 20:09:28'),
+(27, 56, 27, '2022-06-15 20:16:03', '2022-06-15 20:16:03'),
+(28, 57, 28, '2022-06-15 21:10:54', '2022-06-15 21:10:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `patient`
+--
+
+CREATE TABLE `patient` (
+  `id_patient` bigint(20) UNSIGNED NOT NULL,
+  `Nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `DateNaissance` date NOT NULL,
+  `Sexe` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Assurance` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fk_assistant` bigint(20) UNSIGNED NOT NULL,
+  `fk_doctor` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `patient`
+--
+
+INSERT INTO `patient` (`id_patient`, `Nom`, `Prenom`, `DateNaissance`, `Sexe`, `Adresse`, `Phone`, `Email`, `Assurance`, `fk_assistant`, `fk_doctor`, `created_at`, `updated_at`) VALUES
+(3, 'Bnmousa', 'Khalid', '1990-06-16', 'homme', 'Casablanca', '07675243720', 'khalid22@gmail.com', '0', 1, 1, '2022-06-14 23:28:21', '2022-06-15 20:04:43'),
+(5, 'Elkasir', 'Khawla', '1990-06-15', 'femme', 'agadir', '0751426192', 'khawla@gmail.com', '2000', 1, 1, '2022-06-14 23:30:31', '2022-06-15 20:16:39'),
+(6, 'Bnaicha', 'Fatima', '1980-05-30', 'femme', 'agadir', '0637464941', 'Fatima@gmail.com', '4000', 1, 1, '2022-06-14 23:33:46', '2022-06-15 00:22:12'),
+(7, 'Ramzi', 'Amine', '2000-05-31', 'homme', 'agadir', '0677751446', 'amine@gmail.com', '10000', 1, 1, '2022-06-15 15:05:34', '2022-06-15 21:11:09'),
+(41, 'elb', 'ahmed', '2022-06-17', 'homme', 'ait melloul', '09887867868', 'ahmed@gmail.com', NULL, 1, 1, '2022-06-15 20:19:08', '2022-06-15 20:19:08'),
+(42, 'adm', 'med', '1997-02-16', 'homme', 'rabat hay riad', '07899', 'med@gmail.com', '0', 1, 1, '2022-06-15 20:21:33', '2022-06-15 20:22:19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE `services` (
+  `id_service` bigint(20) UNSIGNED NOT NULL,
+  `service` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prix` double NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`id_service`, `service`, `prix`, `created_at`, `updated_at`) VALUES
+(1, 'Aucun', 300, '2022-06-15 19:48:04', '2022-06-15 19:48:04'),
+(2, 'Prothèses Dentaire', 2000, '2022-06-15 20:26:57', '2022-06-15 20:26:57'),
+(3, 'Soins des gencives', 4000, '2022-06-14 18:50:22', '2022-06-14 18:50:22'),
+(4, 'La prophylaxie', 3000, '2022-06-14 18:50:49', '2022-06-14 18:50:49'),
+(9, 'détartrage', 500, '2022-06-15 22:11:18', '2022-06-15 22:11:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `traitements`
+--
+
+CREATE TABLE `traitements` (
+  `id_traitement` bigint(20) UNSIGNED NOT NULL,
+  `fk_service` bigint(20) UNSIGNED NOT NULL,
+  `fk_dent` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `traitements`
+--
+
+INSERT INTO `traitements` (`id_traitement`, `fk_service`, `fk_dent`, `created_at`, `updated_at`) VALUES
+(23, 2, 3, '2022-06-15 19:52:57', '2022-06-15 19:52:57'),
+(24, 3, 20, '2022-06-15 19:54:10', '2022-06-15 19:54:10'),
+(25, 4, 16, '2022-06-15 19:55:38', '2022-06-15 19:55:38'),
+(26, 2, 9, '2022-06-15 20:09:25', '2022-06-15 20:09:25'),
+(27, 2, 1, '2022-06-15 20:15:59', '2022-06-15 20:15:59'),
+(28, 4, 15, '2022-06-15 21:10:50', '2022-06-15 21:10:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Dr. Bernadine Runolfsdottir III', 'pacocha.luella@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Nwz7tyznc1', '2022-05-28 14:33:40', '2022-05-28 14:33:40'),
+(2, 'Moises Abbott', 'durgan.birdie@example.org', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'jN9AzfY36T', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(3, 'Kitty Muller', 'manley55@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '9yKcbOrqLq', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(4, 'Dr. Ned Mraz PhD', 'bruen.cedrick@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'b2S7IMSeXp', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(5, 'Jenifer Ondricka II', 'iromaguera@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'IBZrfn5Rvm', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(6, 'Lacey Ondricka', 'monroe.macejkovic@example.org', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ybfw6R1ozm', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(7, 'Braden Shanahan V', 'bmann@example.org', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Oib9LB7nKv', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(8, 'Mrs. Cali O\'Hara', 'casper.evangeline@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'EsHRiVZM1V', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(9, 'Stevie McKenzie', 'aaliyah69@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '4riRlK60Q2', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(10, 'Cleveland Hammes', 'anya.herman@example.com', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'beQupe1sB3', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(11, 'Otto Champlin', 'prosacco.xzavier@example.org', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'BA70h8X6aS', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(12, 'Trycia Haag', 'ryley.boyle@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'R8n8LKKD4j', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(13, 'Hudson Thiel PhD', 'qlindgren@example.com', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '6CwhXY1T3w', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(14, 'Sandra Lebsack', 'hparisian@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'VeVeJBmQTn', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(15, 'Prof. Lynn Daniel DDS', 'malachi.gislason@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '3oHNGAxUi7', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(16, 'Ms. Tia Kunde', 'bruen.cleveland@example.org', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'S6g4vit6Zm', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(17, 'Izaiah Auer II', 'hauck.flavie@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'tOXYpT7NN3', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(18, 'Dr. Cathryn Stamm', 'halvorson.darrick@example.com', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cdfreEXnm1', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(19, 'Prof. Ottilie Christiansen MD', 'bartoletti.callie@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'eKas2F0zzv', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(20, 'Nikolas Hartmann', 'brandon.keeling@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'lq6ffH9HOv', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(21, 'Jay Will', 'erwin37@example.org', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'tf26bP3sdT', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(22, 'Dr. Adella Oberbrunner III', 'christa.daugherty@example.org', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'eEMFQ2TUmy', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(23, 'Mike Hackett', 'schmitt.madisen@example.org', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2oRru6Xpnu', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(24, 'Esteban Bartoletti I', 'mfeeney@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'bxgztNYP6b', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(25, 'Terrill Streich PhD', 'ehodkiewicz@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2ZT2HPliaN', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(26, 'Dr. Tevin Tromp Sr.', 'tianna.spencer@example.org', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'jDBfKW8yCG', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(27, 'Lyda Dietrich', 'luna90@example.org', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'UfhEQjsIcm', '2022-05-28 14:33:41', '2022-05-28 14:33:41'),
+(28, 'Victoria Ward', 'eichmann.ignatius@example.net', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'w5KZp8Oeer', '2022-05-28 14:33:42', '2022-05-28 14:33:42'),
+(29, 'Scotty Swaniawski', 'towne.brisa@example.com', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'u1nJOf9hur', '2022-05-28 14:33:42', '2022-05-28 14:33:42'),
+(30, 'Brandt Gerhold I', 'osinski.porter@example.org', '2022-05-28 14:33:40', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'rNbLZ82d47', '2022-05-28 14:33:42', '2022-05-28 14:33:42'),
+(31, 'Luciano Considine V', 'litzy.lemke@example.net', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'SiUAEumPge', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(32, 'Dr. Maddison Vandervort', 'sabbott@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2vNZ6z5VcE', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(33, 'Fredrick Koch', 'kiana.crist@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'p4pGhyJw5R', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(34, 'Dr. Walton Hill DVM', 'bradley82@example.com', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'eL2Nm6K2be', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(35, 'Elias Hegmann', 'xtreutel@example.net', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '4vWvDuRFaj', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(36, 'Marcia Carroll', 'cade.feest@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '4mHtFGaNwe', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(37, 'Jacquelyn Kunze', 'salvador64@example.net', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'MmsnNQh6QZ', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(38, 'Enrico Mitchell', 'padberg.queen@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'yKG5V8FJfr', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(39, 'Mr. Leif Franecki', 'yaltenwerth@example.net', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ApIxBWa4GW', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(40, 'Bridget Johns Sr.', 'javier66@example.net', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'hhpFzsxqeR', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(41, 'Prof. Nicole Heller', 'afton91@example.com', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '964Yeh13ey', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(42, 'Andres Armstrong Jr.', 'osinski.sid@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'pxDKABNfPX', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(43, 'Chandler Reinger', 'tlueilwitz@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'lahOo3dWi2', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(44, 'Mr. Adolfo Pacocha Sr.', 'erik82@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'TGEKP905Rk', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(45, 'Ms. Myriam Cruickshank V', 'melissa.skiles@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'uakgjkeDbI', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(46, 'Yvette Wisoky', 'charlie.cartwright@example.com', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'dofNcyV1zm', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(47, 'Amya McLaughlin MD', 'ygoyette@example.net', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'U4X4VfM6B8', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(48, 'Theodora Wisozk V', 'moses73@example.net', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ipTDMIfNfV', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(49, 'Dr. Davin Lind DDS', 'german.gorczany@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'HFfq82U2jC', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(50, 'Madelynn Wehner V', 'jhowell@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Peb2p3SKzW', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(51, 'Damion Zboncak', 'archibald20@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'FTwG8T1WDA', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(52, 'Keon Funk', 'marco.fay@example.com', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'xYgg0xaUbY', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(53, 'Sophie Roberts', 'allene.purdy@example.net', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'caMRPVytIW', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(54, 'Nelle Lindgren', 'srussel@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '6KqX2NLbH3', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(55, 'Celestine Waters Jr.', 'tierra.kulas@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '8VuUbBUJ05', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(56, 'Prof. Jonatan Mayer', 'mdaugherty@example.com', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ZYDI5rLQKz', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(57, 'Miss Rubie Stamm IV', 'madeline13@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Fn41yfCbVQ', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(58, 'Scot Rohan', 'xhomenick@example.com', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'rUmXwFPciL', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(59, 'Mr. Carson Bernhard', 'gnader@example.net', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'FTs1LWgeLz', '2022-05-28 15:05:38', '2022-05-28 15:05:38'),
+(60, 'Mr. Nash Goldner', 'hauck.noemi@example.org', '2022-05-28 15:05:38', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'wTe953cl7w', '2022-05-28 15:05:39', '2022-05-28 15:05:39');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id_admin`),
+  ADD UNIQUE KEY `admin_email_unique` (`Email`);
+
+--
+-- Indexes for table `assistant`
+--
+ALTER TABLE `assistant`
+  ADD PRIMARY KEY (`id_assistant`),
+  ADD UNIQUE KEY `assistant_email_unique` (`Email`),
+  ADD KEY `assistant_fk_admin_foreign` (`fk_admin`),
+  ADD KEY `assistant_fk_doctor_foreign` (`fk_doctor`);
+
+--
+-- Indexes for table `consultation`
+--
+ALTER TABLE `consultation`
+  ADD PRIMARY KEY (`id_consultation`),
+  ADD KEY `consultation_fk_assistant_foreign` (`fk_assistant`),
+  ADD KEY `consultation_fk_doctor_foreign` (`fk_doctor`);
+
+--
+-- Indexes for table `dents`
+--
+ALTER TABLE `dents`
+  ADD PRIMARY KEY (`id_dents`);
+
+--
+-- Indexes for table `doctor`
+--
+ALTER TABLE `doctor`
+  ADD PRIMARY KEY (`id_doctor`),
+  ADD UNIQUE KEY `doctor_email_unique` (`Email`),
+  ADD KEY `doctor_fk_admin_foreign` (`fk_admin`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `events_fk_doctor_foreign` (`fk_doctor`),
+  ADD KEY `events_fk_assistant_foreign` (`fk_assistant`);
+
+--
+-- Indexes for table `event_doctors`
+--
+ALTER TABLE `event_doctors`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `event_doctors_fk_doctor_foreign` (`fk_doctor`),
+  ADD KEY `event_doctors_fk_patient_foreign` (`fk_patient`),
+  ADD KEY `event_doctors_fk_consultation_foreign` (`fk_consultation`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `hestory`
+--
+ALTER TABLE `hestory`
+  ADD PRIMARY KEY (`id_hestory`),
+  ADD KEY `hestory_fk_consultation_foreign` (`fk_consultation`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `operations`
+--
+ALTER TABLE `operations`
+  ADD PRIMARY KEY (`id_operation`),
+  ADD KEY `operations_fk_consultation_foreign` (`fk_consultation`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `patient`
+--
+ALTER TABLE `patient`
+  ADD PRIMARY KEY (`id_patient`),
+  ADD UNIQUE KEY `patient_email_unique` (`Email`),
+  ADD KEY `patient_fk_assistant_foreign` (`fk_assistant`),
+  ADD KEY `patient_fk_doctor_foreign` (`fk_doctor`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id_service`);
+
+--
+-- Indexes for table `traitements`
+--
+ALTER TABLE `traitements`
+  ADD PRIMARY KEY (`id_traitement`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id_admin` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `assistant`
+--
+ALTER TABLE `assistant`
+  MODIFY `id_assistant` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `consultation`
+--
+ALTER TABLE `consultation`
+  MODIFY `id_consultation` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT for table `dents`
+--
+ALTER TABLE `dents`
+  MODIFY `id_dents` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `doctor`
+--
+ALTER TABLE `doctor`
+  MODIFY `id_doctor` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `event_doctors`
+--
+ALTER TABLE `event_doctors`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hestory`
+--
+ALTER TABLE `hestory`
+  MODIFY `id_hestory` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `operations`
+--
+ALTER TABLE `operations`
+  MODIFY `id_operation` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `patient`
+--
+ALTER TABLE `patient`
+  MODIFY `id_patient` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id_service` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `traitements`
+--
+ALTER TABLE `traitements`
+  MODIFY `id_traitement` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `assistant`
+--
+ALTER TABLE `assistant`
+  ADD CONSTRAINT `assistant_fk_admin_foreign` FOREIGN KEY (`fk_admin`) REFERENCES `admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `assistant_fk_doctor_foreign` FOREIGN KEY (`fk_doctor`) REFERENCES `doctor` (`id_doctor`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `consultation`
+--
+ALTER TABLE `consultation`
+  ADD CONSTRAINT `consultation_fk_assistant_foreign` FOREIGN KEY (`fk_assistant`) REFERENCES `assistant` (`id_assistant`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `consultation_fk_doctor_foreign` FOREIGN KEY (`fk_doctor`) REFERENCES `doctor` (`id_doctor`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `doctor`
+--
+ALTER TABLE `doctor`
+  ADD CONSTRAINT `doctor_fk_admin_foreign` FOREIGN KEY (`fk_admin`) REFERENCES `admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `events_fk_assistant_foreign` FOREIGN KEY (`fk_assistant`) REFERENCES `assistant` (`id_assistant`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `events_fk_doctor_foreign` FOREIGN KEY (`fk_doctor`) REFERENCES `doctor` (`id_doctor`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `event_doctors`
+--
+ALTER TABLE `event_doctors`
+  ADD CONSTRAINT `event_doctors_fk_consultation_foreign` FOREIGN KEY (`fk_consultation`) REFERENCES `consultation` (`id_consultation`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `event_doctors_fk_doctor_foreign` FOREIGN KEY (`fk_doctor`) REFERENCES `doctor` (`id_doctor`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `event_doctors_fk_patient_foreign` FOREIGN KEY (`fk_patient`) REFERENCES `patient` (`id_patient`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `hestory`
+--
+ALTER TABLE `hestory`
+  ADD CONSTRAINT `hestory_fk_consultation_foreign` FOREIGN KEY (`fk_consultation`) REFERENCES `consultation` (`id_consultation`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `operations`
+--
+ALTER TABLE `operations`
+  ADD CONSTRAINT `operations_fk_consultation_foreign` FOREIGN KEY (`fk_consultation`) REFERENCES `consultation` (`id_consultation`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `patient`
+--
+ALTER TABLE `patient`
+  ADD CONSTRAINT `patient_fk_assistant_foreign` FOREIGN KEY (`fk_assistant`) REFERENCES `assistant` (`id_assistant`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `patient_fk_doctor_foreign` FOREIGN KEY (`fk_doctor`) REFERENCES `doctor` (`id_doctor`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
